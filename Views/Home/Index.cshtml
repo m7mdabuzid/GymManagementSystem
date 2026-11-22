@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Gym Management Dashboard</h1>
+    <p class="lead">Manage members, sessions, and trainers from one place.</p>
+</div>
+
+<div class="row mt-4 dashboard-row">
+
+    <!-- MEMBERS CARD -->
+    <div class="col-md-4 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-icon">💪</div>
+            <h3 class="dashboard-title">Members</h3>
+            <div class="dashboard-number counter" data-target="@ViewBag.MemberCount">0</div>
+            <a class="btn dashboard-btn" asp-controller="Members" asp-action="Index">View Members</a>
+        </div>
+    </div>
+
+    <!-- SESSIONS CARD -->
+    <div class="col-md-4 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-icon">📅</div>
+            <h3 class="dashboard-title">Sessions</h3>
+            <div class="dashboard-number counter" data-target="@ViewBag.SessionCount">0</div>
+            <a class="btn dashboard-btn" asp-controller="ClassSessions" asp-action="Index">View Sessions</a>
+        </div>
+    </div>
+
+    <!-- TRAINERS CARD -->
+    <div class="col-md-4 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-icon">🏋️</div>
+            <h3 class="dashboard-title">Trainers</h3>
+            <div class="dashboard-number counter" data-target="@ViewBag.TrainerCount">0</div>
+            <a class="btn dashboard-btn" asp-controller="Trainers" asp-action="Index">View Trainers</a>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        // Smooth number counter animation
+        document.querySelectorAll('.counter').forEach(counter => {
+            let target = +counter.getAttribute('data-target');
+            let current = 0;
+
+            const update = () => {
+                let increment = target / 60; // speed
+                if (current < target) {
+                    current += increment;
+                    counter.innerText = Math.ceil(current);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            update();
+        });
+    </script>
+}

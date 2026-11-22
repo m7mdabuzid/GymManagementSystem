@@ -1,0 +1,128 @@
+﻿@model GymManagementSystem.Models.Member
+
+<h2>Member Details</h2>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <div style="color: green;">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="color: red;">@TempData["Error"]</div>
+}
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Membership Type</th>
+        <td>@Model.MembershipType</td>
+    </tr>
+    <tr>
+        <th>Active</th>
+        <td>@Model.IsActive</td>
+    </tr>
+    <tr>
+        <th>Membership End</th>
+        <td>@Model.MembershipEndDate</td>
+    </tr>
+</table>
+
+<h3>Enrolled Classes</h3>
+
+@if (!Model.Bookings.Any())
+{
+    <p>No classes booked yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Trainer</th>
+                <th>Schedule</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.Bookings.OrderBy(x => x.Session.ScheduleTime))
+            {
+                <tr>
+                    <td>@b.Session.ClassName</td>
+                    <td>@b.Session.Trainer.Name</td>
+                    <td>@b.Session.ScheduleTime</td>
+                    <td>
+                        <a asp-action="CancelBooking"
+                           asp-route-memberId="@Model.MemberId"
+                           asp-route-sessionId="@b.SessionId">
+                            Cancel
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Book This Member Into a Class</h3>
+
+@{
+    // Controller must set: ViewBag.AllSessions = List<ClassSession>
+    var sessions = ViewBag.AllSessions as List<GymManagementSystem.Models.ClassSession>
+                   ?? new List<GymManagementSystem.Models.ClassSession>();
+
+    var bookedSessionIds = Model.Bookings.Select(b => b.SessionId).ToHashSet();
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Trainer</th>
+            <th>Schedule</th>
+            <th>Slots</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in sessions.OrderBy(x => x.ScheduleTime))
+        {
+            // skip already booked sessions
+            if (bookedSessionIds.Contains(s.SessionId))
+            {
+                continue;
+            }
+
+            var booked = s.Bookings.Count;
+            var available = s.MaxSlots - booked;
+
+            <tr>
+                <td>@s.ClassName</td>
+                <td>@s.Trainer.Name</td>
+                <td>@s.ScheduleTime</td>
+                <td>@available / @s.MaxSlots</td>
+                <td>
+                    @if (available > 0)
+                    {
+                        <a asp-action="Book"
+                           asp-route-memberId="@Model.MemberId"
+                           asp-route-sessionId="@s.SessionId">
+                            Book
+                        </a>
+                    }
+                    else
+                    {
+                        <span>Full</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

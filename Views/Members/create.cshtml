@@ -1,0 +1,23 @@
+﻿@model GymManagementSystem.Models.Member
+
+<h2>Add New Member</h2>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MembershipType"></label>
+        <select asp-for="MembershipType" class="form-control"
+                asp-items="Html.GetEnumSelectList<GymManagementSystem.Models.MembershipType>()">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Member</button>
+</form>

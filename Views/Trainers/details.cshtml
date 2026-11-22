@@ -1,0 +1,58 @@
+﻿@model GymManagementSystem.Models.Trainer
+
+<h2>Trainer Details</h2>
+
+<p>
+    <a asp-action="Index">Back to Trainers</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Specialization</th>
+        <td>@Model.Specialization</td>
+    </tr>
+</table>
+
+<h3>Assigned Classes</h3>
+
+@if (!Model.AssignedClasses.Any())
+{
+    <p>This trainer has no classes assigned.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Schedule</th>
+                <th>Slots</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.AssignedClasses)
+            {
+                var booked = s.Bookings.Count;
+                var available = s.MaxSlots - booked;
+
+                <tr>
+                    <td>@s.ClassName</td>
+                    <td>@s.ScheduleTime</td>
+                    <td>@available / @s.MaxSlots</td>
+                    <td>
+                        <a asp-controller="ClassSessions"
+                           asp-action="Details"
+                           asp-route-id="@s.SessionId">
+                            View Session
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

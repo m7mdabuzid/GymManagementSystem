@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GymManagementSystem.Models.ClassSession>
+
+<h2>Class Sessions</h2>
+
+<p>
+    <a asp-controller="Members" asp-action="Index">Back to Members</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Trainer</th>
+            <th>Schedule</th>
+            <th>Max Slots</th>
+            <th>Booked</th>
+            <th>Available</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            var trainerName = s.Trainer != null ? s.Trainer.Name : "(none)";
+            var booked = s.Bookings.Count;
+
+            <tr>
+                <td>@s.ClassName</td>
+                <td>@trainerName</td>
+                <td>@s.ScheduleTime</td>
+                <td>@s.MaxSlots</td>
+                <td>@booked</td>
+                <td>@(s.MaxSlots - booked)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@s.SessionId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

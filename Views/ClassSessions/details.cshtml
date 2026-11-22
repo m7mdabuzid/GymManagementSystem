@@ -1,0 +1,59 @@
+﻿@model GymManagementSystem.Models.ClassSession
+
+<h2>Class Details</h2>
+
+<p>
+    <a asp-action="Index">Back to Sessions</a>
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <div style="color: green;">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div style="color: red;">@TempData["Error"]</div>
+}
+
+<table class="table">
+    <tr>
+        <th>Class Name</th>
+        <td>@Model.ClassName</td>
+    </tr>
+    <tr>
+        <th>Trainer</th>
+        <td>@(Model.Trainer != null ? Model.Trainer.Name : "(none)")</td>
+    </tr>
+    <tr>
+        <th>Schedule</th>
+        <td>@Model.ScheduleTime</td>
+    </tr>
+    <tr>
+        <th>Max Slots</th>
+        <td>@Model.MaxSlots</td>
+    </tr>
+    <tr>
+        <th>Booked</th>
+        <td>@Model.Bookings.Count</td>
+    </tr>
+    <tr>
+        <th>Available</th>
+        <td>@(Model.MaxSlots - Model.Bookings.Count)</td>
+    </tr>
+</table>
+
+<h3>Booked Members</h3>
+
+@if (!Model.Bookings.Any())
+{
+    <p>No members booked for this class yet.</p>
+}
+else
+{
+    <ul>
+        @foreach (var b in Model.Bookings)
+        {
+            <li>@b.Member.Name (@b.Member.MembershipType)</li>
+        }
+    </ul>
+}

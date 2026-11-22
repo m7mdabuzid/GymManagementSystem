@@ -1,0 +1,313 @@
+/* ========= Base ========= */
+
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    background: #0b1120; /* dark navy */
+    color: #e5e7eb; /* light text */
+}
+
+/* Focus outline (keep from template) */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* ========= Navbar ========= */
+
+.gym-navbar {
+    background: #020617; /* almost black */
+}
+
+.gym-brand {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+/* ========= Layout Helpers ========= */
+
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Generic dark card (for details pages, etc.) */
+.gym-card {
+    background: #020617;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.7);
+    border: 1px solid #1f2937;
+}
+
+.page-title {
+    margin: 0 0 16px 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* ========= Buttons ========= */
+
+.btn-gym-primary {
+    background: linear-gradient(135deg, #6366f1, #22c55e);
+    border: none;
+    color: #f9fafb;
+    font-weight: 500;
+    padding-inline: 18px;
+}
+
+    .btn-gym-primary:hover {
+        opacity: 0.9;
+        color: #f9fafb;
+    }
+
+/* ========= Tables ========= */
+
+/* Dark tables everywhere */
+.table,
+.table td,
+.table th {
+    color: #e5e7eb !important; /* light text */
+}
+
+    .table thead {
+        background: #111827;
+    }
+
+        .table thead th {
+            border-bottom: none;
+            font-weight: 500;
+            color: #f9fafb !important;
+        }
+
+    .table tbody tr {
+        background: #020617;
+    }
+
+        .table tbody tr:nth-child(even) {
+            background: #030712;
+        }
+
+        .table tbody tr:hover {
+            background-color: #1e293b !important;
+        }
+
+    .table td,
+    .table th {
+        border-color: #1f2937;
+    }
+
+    /* Links inside tables */
+    .table a {
+        color: #60a5fa;
+    }
+
+        .table a:hover {
+            color: #93c5fd;
+        }
+
+/* ========= Dashboard (Home) ========= */
+
+/* White cards with BLACK text */
+.dashboard-card {
+    background: #ffffff;
+    color: #000000; /* default black text */
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Titles inside cards: "Members", "Sessions", "Trainers" */
+.dashboard-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #000000; /* black */
+}
+
+/* Numbers inside cards: 1, 2, etc. */
+.dashboard-number {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 10px 0 25px 0;
+    color: #000000; /* black */
+}
+
+/* Buttons inside cards */
+.dashboard-btn {
+    background: #2563eb;
+    color: #ffffff !important;
+    border-radius: 8px;
+    font-weight: 500;
+    padding-inline: 18px;
+}
+
+    .dashboard-btn:hover {
+        background: #1d4ed8;
+    }
+.dashboard-card h3,
+.dashboard-card .dashboard-title,
+.dashboard-card .dashboard-number,
+.dashboard-card p,
+.dashboard-card span {
+    color: #000 !important; /* true black */
+}
+.dashboard-card * {
+    color: #000 !important;
+}
+/* Force black text inside dashboard cards */
+.card-body h3,
+.card-body p.display-6 {
+    color: #000 !important;
+}
+/* Make tables in cards use the dark style */
+.table-gym {
+    width: 100%;
+}
+
+    /* Action buttons in table cells */
+    .table-gym td .btn {
+        font-size: 0.85rem;
+        padding: 4px 10px;
+    }
+
+/* Slight rounding on cards */
+.gym-card {
+    border-radius: 16px;
+}
+
+/* Optional subtle fade-in for pages */
+.gym-card {
+    animation: fadeInUp 0.25s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.alert-gym {
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background-color: #022c22; /* dark green-ish for success */
+    border-color: #16a34a;
+    color: #bbf7d0;
+}
+
+    .alert-gym.alert-danger {
+        background-color: #450a0a;
+        border-color: #ef4444;
+        color: #fecaca;
+    }
+/* Make Login / Register links in navbar white */
+.navbar .navbar-nav .nav-link,
+.navbar .navbar-nav .nav-item a {
+    color: #ffffff !important;
+}
+/* ==== Dashboard layout ==== */
+
+.dashboard-row {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Card */
+.dashboard-card {
+    position: relative;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 18px;
+    padding: 26px 22px 30px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.45);
+    border: 1px solid rgba(148,163,184,0.7);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+    /* Gradient glow border on hover */
+    .dashboard-card::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        background: linear-gradient(120deg, #6366f1, #22c55e, #06b6d4);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s ease;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 60px rgba(15,10,4,0.7);
+        border-color: transparent;
+    }
+
+        .dashboard-card:hover::before {
+            opacity: 1;
+        }
+
+/* Icon at top */
+.dashboard-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+    font-size: 1.5rem;
+}
+
+/* Title: "Members", "Sessions", "Trainers" */
+.dashboard-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #000000;
+}
+
+/* Number: animated counter */
+.dashboard-number {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #000000;
+}
+
+/* Button in card */
+.dashboard-btn {
+    background: #111827;
+    color: #f9fafb !important;
+    border-radius: 999px;
+    padding: 8px 20px;
+    border: 1px solid #4b5563;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+    .dashboard-btn:hover {
+        background: #020617;
+        border-color: #9ca3af;
+    }

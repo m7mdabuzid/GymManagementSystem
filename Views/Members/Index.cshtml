@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GymManagementSystem.Models.Member>
+
+<div class="page-container">
+    <div class="gym-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="page-title">Members</h2>
+            <a asp-action="Create" class="btn btn-gym-primary">Add New Member</a>
+        </div>
+
+        <table class="table table-gym">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Membership</th>
+                    <th>Active</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.Name</td>
+                        <td>@m.MembershipType</td>
+                        <td>@m.IsActive</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@m.MemberId" class="btn btn-sm btn-outline-light me-1">Details</a>
+                            <a asp-action="Edit" asp-route-id="@m.MemberId" class="btn btn-sm btn-outline-info me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@m.MemberId" class="btn btn-sm btn-outline-danger delete-link">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
